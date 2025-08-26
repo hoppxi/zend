@@ -1,0 +1,19 @@
+{
+  "image": "path/to/image.png",
+  "images": "path/to/images/",
+  "music": "path/to/music.mp3",
+  "musics": "path/to/musics",
+  "engine": "google",
+  "clock": true,
+  "visualizer": true,
+  "palette": {
+    "primary": "#95ccff",
+    "on-primary": "#003352",
+    "primary-container": "#004a75",
+    "on-primary-container": "#cde5ff",
+    "secondary": "#b9c8da"
+  },
+  "random": "image",
+  "color": "#abcdef",
+  "suggestions": true
+}

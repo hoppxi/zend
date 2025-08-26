@@ -1,0 +1,33 @@
+{
+  "name": "zend-cli",
+  "version": "1.0.0",
+  "description": "CLI for launching and configuring the Zend minimal browser home page",
+  "bin": {
+    "zend": "./bin/zend.js"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "cli",
+    "browser",
+    "homepage",
+    "nextjs",
+    "launcher"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0",
+    "open": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.2.0"
+  }
+}
