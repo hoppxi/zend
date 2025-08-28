@@ -1,0 +1,7 @@
+archive
+result
+/zend
+web/src
+web/node_modules
+web/dist
+web/public

@@ -1,0 +1,513 @@
+# ===========================================
+# ZEND CONFIGURATION FILE (FULL REFERENCE)
+# ===========================================
+# This file configures the appearance, behavior, and widgets of Zend.
+# It includes everything from UI backgrounds, color themes, fonts,
+# widgets (clock, weather, music), to animations and transitions.
+#
+# All keys are optional unless marked REQUIRED.
+# Any unspecified option will fall back to its default value.
+#
+# ===========================================
+
+# ===========================================
+# COMMON PROPERTIES REFERENCE
+# ===========================================
+# These properties are reused in multiple sections below.
+# Refer to them here to avoid repetitive explanations.
+#
+# POSITIONING OF ELEMENTS ON SCREEN
+# Used by: clock, weather, music, visualizer, etc.
+# Determines where the element will appear on the screen.
+# Supported values:
+#   - Predefined keywords (anchors to screen edges/corners):
+#       "top", "bottom", "left", "right",
+#       "top-left", "top-right", "bottom-left", "bottom-right",
+#       "center"
+#   - Custom coordinates as "(x%, y%)":
+#       "(50%, 50%)" = exact center
+#       "(10%, 90%)" = near bottom-left
+# Tips:
+#   - Use keywords for quick alignment.
+#   - Use percentages for precise positioning in complex layouts.
+# Example:
+#   position: "top-right"
+#   position: "(30%, 75%)"
+# Usage
+# position: "<keyword or (x%, y%)>"
+#
+# FILE AND DIRECTORY PATHS
+# Used by: image backgrounds, local music, icons.
+# Types:
+#   - Absolute: starts with "/" → full system path.
+# Examples:
+#   path: "/home/user/images/bg.png"
+# Usage
+# path: "/home/user/music/"
+# path_list:
+#   - "/home/user/music/song1.mp3"
+#   - "/home/user/music/song2.mp3"
+#
+# COLORS
+# Used by: solid backgrounds, palettes, UI accenting.
+# Formats:
+#   - HEX: "#rrggbb" (e.g., "#ff0000" = red)
+#   - HEX with alpha: "#rrggbbaa" (e.g., "#ff000080" = semi-transparent red)
+# Usage
+# color: "<hex|named|gradient>"
+#
+# TIME FORMATTING (CLOCK & TIME-BASED FEATURES)
+# Uses Day.js format tokens.
+# Examples:
+#   "HH:mm:ss"  = 24-hour format with seconds (default)
+#   "hh:mm A"   = 12-hour format with AM/PM
+#   "dddd, MMMM D" = Full weekday and month (e.g., Wednesday, August 27)
+# Usage
+# time_format: "<Day.js format>"
+#
+# ===========================================
+
+# -------------------------------------------
+# FRONTEND BUILD CONFIGURATION
+# -------------------------------------------
+# Location of the compiled frontend (HTML/CSS/JS).
+# Useful if you are using a custom-built frontend or deploying on a specific environment.
+# Examples:
+#   dist: "/home/user/myproject/frontend/dist"  # Absolute path to build output
+#   dist: "./dist"                              # Relative path to current directory
+# Optional. If omitted, Zend will serve its built-in frontend.
+dist: "/home/hoppxi/devspace/zend/web/dist"
+
+# -------------------------------------------
+# RANDOM BACKGROUND SETTINGS
+# -------------------------------------------
+random:
+  # Enable random background cycling (either color or image).
+  # When enabled, Zend automatically picks a random color or fetches a random image from Lorem Picsum.
+  # Example use-case: Digital signage or dashboards that refresh periodically for variety.
+  # Optional. Default: false.
+  enabled: false
+
+  # What type of random content to display:
+  # - "color" → Solid random colors (auto-generated hex codes)
+  # - "image" → Random photos fetched from Lorem Picsum
+  # Example:
+  #   use: "image"   → Displays random scenic photos.
+  # Optional. Default: "color".
+  use: "color"
+
+  # How often to change the background, in minutes.
+  # Example:
+  #   interval: 15   → Changes every 15 minutes.
+  # Setting a very low value (like 1 minute) can make it feel "dynamic", but may be distracting.
+  # Optional. Default: 10 minutes.
+  interval: 10
+
+  # Number of random options to keep in the pool:
+  # - For "color": up to 100 distinct colors.
+  # - For "image": up to 30 images.
+  # Example:
+  #   max: 10        → Zend picks from 10 pre-fetched random images, cycling through them.
+  # Optional. Defaults: 100 (colors), 30 (images).
+  max: 100
+
+# -------------------------------------------
+# CUSTOM IMAGE BACKGROUND
+# -------------------------------------------
+image:
+  # Enable a image background.
+  enabled: true
+  # If you want a fixed image background instead of random colors or images,
+  # specify either:
+  # - A single image file or folder (path)
+  # - A list of multiple image files or folders (path_list)
+  #
+  # Paths can be:
+  # - Absolute: "/home/user/backgrounds/bg.jpg"
+  #
+  # If both random and image are set, `image` takes priority.
+  # To enable images set solid-color.enable to false and set image path
+  # Or automatically zend will serve the images instead of the solid color if sepcified
+  path: "images/background.png"
+
+  # Use a folder of images to create a slideshow-like background:
+  # Example:
+  #   path_list:
+  #     - "/home/user/wallpapers/sunset/"
+  #     - "/home/user/wallpapers/sunrise/"
+  # This works great for rotating themed backgrounds (e.g., "holiday wallpapers").
+  # To enable path_list, you first should remove `image.path` option
+  # This options should array of only folders or only files
+  # path_list:
+  #   - "images/image1.png"
+  #   - "images/image2.jpg"
+
+# -------------------------------------------
+# IMAGE RENDERING AND FITTING
+# -------------------------------------------
+resize:
+  # How to size the background image:
+  # - "cover"   → Scales to fill entire area (cropping may occur). Best for fullscreen.
+  # - "contain" → Fits image fully without cropping (may leave borders).
+  # - Any valid CSS background-size value (e.g., "100% 100%").
+  # Example:
+  #   mode: "contain" → Ensures no part of the image is cut off.
+  mode: "cover"
+
+  # Position of the background image:
+  # Accepts any CSS background-position:
+  # - Keywords: "center", "top", "bottom", "left", "right"
+  # - Combinations: "top-right", "bottom-left"
+  # - Percentages: "20% 80%"
+  # Example:
+  #   position: "top-left" → Aligns image to top-left corner.
+  position: "center"
+
+  # Whether to tile (repeat) the background image.
+  # Accepts CSS background-repeat values:
+  # - "no-repeat" (default)
+  # - "repeat" (tiles both directions)
+  # - "repeat-x" (horizontal only)
+  # - "repeat-y" (vertical only)
+  repeat: "no-repeat"
+
+# -------------------------------------------
+# BACKGROUND REFRESH CONTROL
+# -------------------------------------------
+refresh:
+  # Automatically refresh background images from a folder (image.path or image.path_list must point to a directory).
+  # Example use-case: Auto-update with new images added to the folder without restarting Zend.
+  enabled: false
+
+  # Interval for refreshing, in seconds.
+  # Example:
+  #   interval: 300 → Refreshes every 5 minutes.
+  interval: 60
+
+  # Whether to pick a fresh image each time Zend restarts.
+  # Useful for setups where you want a different look on each newtab.
+  every_restart: false
+
+# -------------------------------------------
+# SOLID COLOR BACKGROUND
+# -------------------------------------------
+solid:
+  # Enable a fixed solid background color.
+  enabled: true
+
+  # Color to use:
+  # - Single hex: "#ff0000" (red)
+  # - Multiple hex values for gradient: ["#ff0000", "#0000ff"]
+  # Example:
+  #   color: ["#ff7f50", "#1e90ff"] → Coral to Dodger Blue gradient.
+  color: "#ff0000"
+
+  # Use the solid color as an accent to auto-generate a color palette for the UI.
+  use_as_accent: true
+
+# -------------------------------------------
+# GENERAL UI CONFIGURATION
+# -------------------------------------------
+general:
+  # Blur level of background (pixels).
+  # Example: blur: 10 → Strong blur, giving a frosted-glass effect.
+  blur: 5
+
+  # Opacity of background (0 = fully transparent, 1 = fully opaque).
+  # Useful for overlay UIs where background shouldn't distract.
+  opacity: 1
+
+  # Transition effects when changing backgrounds or colors.
+  transition:
+    # Animation type:
+    # - "fade" (smooth crossfade)
+    # - "slide" (slide-in from direction)
+    # - "zoom" (zoom-in/out effect)
+    # - "grow" (expands from a point)
+    type: "fade"
+
+    # How long the transition lasts (in seconds).
+    duration: 1
+
+    # Where the transition originates for "slide" and "grow".
+    # Examples: "top", "bottom-right", "center", "30% 70%".
+    position: "center"
+
+# -------------------------------------------
+# FONT CONFIGURATION
+# -------------------------------------------
+font:
+  # Font family used across the UI.
+  # Can be a stack: "Roboto, Arial, sans-serif"
+  family: "Arial, sans-serif"
+
+  # Font size (in pixels).
+  size: 14
+
+  # Font weight: "normal", "bold", 100-900.
+  weight: "normal"
+
+  # Font style: "normal", "italic", "oblique".
+  style: "normal"
+
+# -------------------------------------------
+# COLOR PALETTE
+# -------------------------------------------
+# Full customization of UI colors.
+# - If omitted, Zend generates colors automatically:
+#   - Solid color mode → palette derived from accent.
+#   - Image mode → palette extracted from dominant colors in image.
+# It should be with these key, unless zend will pick palette from the image or colid color
+palette:
+  primary: "#95ccff"
+  on-primary: "#003352"
+  primary-container: "#004a75"
+  on-primary-container: "#cde5ff"
+  secondary: "#b9c8da"
+  on-secondary: "#233240"
+  secondary-container: "#3a4857"
+  on-secondary-container: "#d5e4f6"
+  tertiary: "#d2bfe6"
+  on-tertiary: "#382a49"
+  tertiary-container: "#4f4061"
+  on-tertiary-container: "#eedbff"
+  error: "#ffb4ab"
+  on-error: "#690005"
+  error-container: "#93000a"
+  on-error-container: "#ffb4ab"
+  background: "#1a1c1e"
+  on-background: "#e2e2e5"
+  surface: "#1a1c1e"
+  on-surface: "#e2e2e5"
+  surface-variant: "#42474e"
+  on-surface-variant: "#c2c7cf"
+  outline: "#8c9198"
+  outline-variant: "#42474e"
+  shadow: "#000000"
+  scrim: "#000000"
+  inverse-surface: "#e2e2e5"
+  inverse-on-surface: "#2f3033"
+  inverse-primary: "#00639a"
+  surface-dim: "#121416"
+  surface-bright: "#37393c"
+  surface-container-lowest: "#0c0e11"
+  surface-container-low: "#1a1c1e"
+  surface-container: "#1e2022"
+  surface-container-high: "#282a2d"
+  surface-container-highest: "#333538"
+
+# ===========================================
+# WIDGET CUSTOMIZATION
+# ===========================================
+# Widgets are interactive UI components displayed on the screen.
+# They include:
+#   - Search bar
+#   - Clock
+#   - Weather
+#   - Music player (with visualizer)
+#
+# Each widget can be enabled/disabled, positioned anywhere,
+# and customized in appearance/behavior.
+# Positions support both keywords ("top-right") and exact coordinates ("30% 70%").
+
+# -------------------------------------------
+# SEARCH BAR WIDGET CONFIGURATION
+# -------------------------------------------
+search_bar:
+  # Search engine to use when submitting a query.
+  # Supported values:
+  #   - "google"      (default, uses https://www.google.com/search?q=)
+  #   - "bing"        (https://www.bing.com/search?q=)
+  #   - "brave"       (https://search.brave.com/search?q=)
+  #   - "duckduckgo"  (https://duckduckgo.com/?q=)
+  #
+  # Example:
+  #   engine: "duckduckgo"
+  #
+  # Use-case:
+  #   - Privacy-conscious users may prefer DuckDuckGo.
+  #   - Corporate environments may require Bing.
+  engine: "google"
+
+  # Enable/disable live search suggestions.
+  # When enabled, suggestions will appear as you type based on the chosen engine.
+  # Example:
+  #   suggestions: false → No auto-complete dropdown.
+  # Optional. Default: true.
+  suggestions: true
+
+  # Custom icon to display inside the search bar.
+  # Path can be local (absolute) or URL.
+  # Example:
+  #   icon: "icons/search.png"
+  #   icon: "https://example.com/custom-icon.svg"
+  # If omitted, Zend uses a default search icon (Google from icons8.com).
+  icon: "https://img.icons8.com/?size=100&id=KF0a7tvdESBd&format=png&color=000000"
+
+  # Placeholder text displayed when input is empty.
+  # Example:
+  #   placeholder: "Type your query here..."
+  # Optional. Default: "Search here..."
+  placeholder: "Search here..."
+
+  # Whether to open search results in a new tab/window.
+  # Example:
+  #   open_in_new_tab: true → Does not replace current tab.
+  # Optional. Default: false.
+  open_in_new_tab: true
+
+# -------------------------------------------
+# CLOCK WIDGET CONFIGURATION
+# -------------------------------------------
+clock:
+  # Enable/disable the clock widget.
+  # Example:
+  #   enabled: false → Hides the clock entirely.
+  # Optional. Default: true.
+  enabled: true
+
+  # Date and time format.
+  # Uses Day.js formatting tokens (https://day.js.org/docs/en/display/format).
+  # Examples:
+  #   time: "hh:mm A"      → 12-hour format with AM/PM (e.g., 05:42 PM)
+  #   date: "dddd, MMMM D" → Full weekday and month (e.g., Wednesday, August 27)
+  format:
+    time: "HH:mm:ss" # Default: 24-hour time with seconds (e.g., 23:59:59)
+    date: "YYYY-MM-DD" # Default: ISO date format (e.g., 2025-08-27)
+
+  # Timezone for the clock.
+  # Examples:
+  #   timezone: "America/New_York"
+  #   timezone: "Europe/London"
+  # If omitted, system timezone is used.
+  timezone: "UTC"
+
+  # Position of the clock on the screen.
+  # Supported values:
+  #   - Keywords: "top", "bottom", "left", "right", "top-left", "top-right",
+  #               "bottom-left", "bottom-right", "center"
+  #   - Coordinates: "(x%, y%)", e.g., "(10%, 90%)" for bottom-left custom placement.
+  # Examples:
+  #   position: "bottom-right" → Places clock at bottom-right of screen.
+  #   position: "(50%, 5%)"    → Places clock horizontally centered near top.
+  position: "top-right"
+
+# -------------------------------------------
+# WEATHER WIDGET CONFIGURATION
+# -------------------------------------------
+weather:
+  # Enable/disable the weather widget.
+  # Useful if you do not want to display weather info or lack an API key.
+  # Optional. Default: true.
+  enabled: true
+
+  # Location for weather data.
+  # Supported formats:
+  #   - City name only: "London"
+  #   - City + Country code: "London,UK"
+  #   - Latitude/Longitude: "51.5074,-0.1278"
+  # Examples:
+  #   location: "Tokyo,JP"
+  #   location: "40.7128,-74.0060" (New York)
+  # If omitted, defaults to "New York,US".
+  location: "New York,US"
+
+  # Units for temperature and other weather data.
+  # Supported values:
+  #   - "metric"   → Celsius (°C)
+  #   - "imperial" → Fahrenheit (°F)
+  #   - "standard" → Kelvin (K)
+  # Example:
+  #   units: "imperial" → Shows temperature in °F.
+  units: "metric"
+
+  # REQUIRED: API key for weather data from OpenWeatherMap.
+  # Get a free key at: https://openweathermap.org/api
+  # Example:
+  #   api_key: "abc123yourkey"
+  api_key: "your_openweathermap_api_key"
+
+  # Position of the weather widget on the screen.
+  # Same format as `clock.position`.
+  # Example:
+  #   position: "bottom-left"
+  position: "top-left"
+
+# -------------------------------------------
+# MUSIC PLAYER WIDGET CONFIGURATION
+# -------------------------------------------
+music:
+  # Enable/disable the music widget.
+  # Useful for dashboards with background music or audio visualization.
+  # Optional. Default: false.
+  enabled: true
+
+  # Position of the music player controls on the screen.
+  # Same positioning rules as other widgets.
+  # Example:
+  #   position: "bottom-right"
+  position: "bottom-left"
+
+  # ---------------------------------------
+  # LOCAL MUSIC SOURCE SETTINGS
+  # ---------------------------------------
+  local:
+    # Enable local music playback from files/folders on disk.
+    # Optional. Default: false.
+    enabled: true
+
+    # Path to a folder containing audio files or a single audio file.
+    # Supported formats: mp3, wav, ogg (depending on browser support).
+    # Example:
+    #   path: "/home/user/Music/"
+    #   path: "/home/user/Music/song.mp3"
+    # REQUIRED if local.enabled = true and path_list is not set.
+    path: "/media/hdd/EA/Music/spotify"
+
+    # Alternative to `path`: provide multiple explicit files/folders.
+    # This options should array of only folders or only files
+    # Examples:
+    #   path_list:
+    #     - "music/song1.mp3"
+    #     - "music/song2.mp3"
+    #     - "/home/user/Music/Album1/"
+    # path_list:
+    #   - "music/song1.mp3"
+    #   - "music/song2.mp3"
+    #   - "music/song3.mp3"
+
+    # Shuffle playback order.
+    # Example:
+    #   shuffle: false → Plays in listed order.
+    # Optional. Default: true.
+    shuffle: true
+
+  # ---------------------------------------
+  # MUSIC VISUALIZER CONFIGURATION
+  # ---------------------------------------
+  visualizer:
+    # Enable/disable the visualizer.
+    # When enabled, audio playback triggers animated visuals.
+    enabled: true
+
+    # Type of visualization:
+    #   - "bars"    → Vertical bars reacting to frequencies.
+    #   - "wave"    → Oscillating waveform display.
+    #   - "circle"  → Circular spectrum around a center point.
+    #   - "dots"    → Floating particle effects responding to beats.
+    # Example:
+    #   type: "circle"
+    type: "bars"
+
+    # Visualizer size/intensity scale.
+    # Larger numbers make taller bars, bigger circles, more dots, etc.
+    # Example:
+    #   size: 100 → Dramatic full-screen effect.
+    # Optional. Default: 50.
+    size: 50
+
+    # Position of the visualizer overlay on the screen.
+    # Example:
+    #   position: "center"
+    #   position: "bottom"
+    position: "bottom"

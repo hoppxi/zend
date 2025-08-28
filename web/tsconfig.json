@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
+    "lib": ["esnext", "dom"],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src"] // <-- only type check your app code
+}
