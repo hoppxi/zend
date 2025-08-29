@@ -1,0 +1,25 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "Zend Documentation"
+theme = "hugo-book"
+enableGitInfo = true
+
+[params]
+  mainSections = ["cli", "config", "appearance", "widgets"]
+  showTOC = true
+  tocLevel = 2
+  highlightStyle = "monokai"
+  highlightLineNumbers = true
+  enableSearch = true
+  defaultTheme = "auto"
+
+[params.footer]
+  enable = true
+  content = "© 2025 Zend • Powered by Hugo Book"
+  links = [
+    { name = "GitHub", url = "https://github.com/hoppxi/zend" },
+    { name = "MCU CLI", url = "https://github.com/hoppxi/mcu-cli" }
+  ]
+
+[params.header]
+  enable = true

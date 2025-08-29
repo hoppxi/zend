@@ -1,14 +1,14 @@
-# zend — Zend CLI
+---
+title: "Zend CLI"
+date: 2025-08-29
+draft: false
+---
 
-**zend** is a lightweight, cross-platform command-line tool to interact with **Zend**, a customizable browser homepage. Using zend, you can open your Zend homepage, manage configuration, and integrate it with your terminal workflow.
+# Zend CLI
 
-## Features
+**zend** is a lightweight, cross-platform command-line tool to interact with **Zend**, a customizable browser homepage. You can open your homepage, manage configuration, and integrate it into your terminal workflow.
 
-- Open your Zend homepage directly from the terminal
-- Apply temporary configuration overrides via JSON
-- Manage Zend YAML configuration files
-- Generate shell autocompletion scripts
-- Cross-platform support (Linux, macOS, Windows)
+---
 
 ## Installation
 
@@ -19,7 +19,7 @@ git clone https://github.com/hoppxi/zend.git
 cd zend
 ```
 
-Make zend executable:
+Make `zend` executable:
 
 ```bash
 # Linux / macOS
@@ -30,7 +30,9 @@ chmod +x zend
 .\zend.exe --help
 ```
 
-You can optionally move `zend` to a directory in your `PATH` for global access.
+Optionally, move `zend` to a directory in your `PATH` for global access.
+
+---
 
 ## Usage
 
@@ -45,21 +47,22 @@ zend [command]
 - `-h, --help` — Show help for `zend`
 - `-v, --version` — Show the version of `zend`
 
-### Commands
+---
 
-#### `open`
+## Commands
+
+### `open`
 
 Open your Zend homepage in the default browser with optional temporary configuration overrides:
 
 ```bash
 zend open [flags]
-
 zend open --override '{"theme":"dark"}'
 ```
 
 ---
 
-#### `config`
+### `config`
 
 View, modify, validate, or apply Zend configuration files:
 
@@ -78,7 +81,7 @@ zend config [file] [flags]
 
 ---
 
-#### `completion`
+### `completion`
 
 Generate shell autocompletion scripts for zend:
 
@@ -87,6 +90,8 @@ zend completion [command]
 ```
 
 Supported shells: `bash`, `zsh`, `fish`, `powershell`
+
+Example:
 
 ```bash
 zend completion bash > ~/.bashrc
