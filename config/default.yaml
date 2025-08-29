@@ -76,7 +76,7 @@
 #   dist: "/home/user/myproject/frontend/dist"  # Absolute path to build output
 #   dist: "./dist"                              # Relative path to current directory
 # Optional. If omitted, Zend will serve its built-in frontend.
-dist: "/home/hoppxi/devspace/zend/web/dist"
+# dist: "/home/username/dist"
 
 # -------------------------------------------
 # RANDOM BACKGROUND SETTINGS
@@ -116,7 +116,7 @@ random:
 # -------------------------------------------
 image:
   # Enable a image background.
-  enabled: true
+  enabled: false
   # If you want a fixed image background instead of random colors or images,
   # specify either:
   # - A single image file or folder (path)
@@ -128,7 +128,7 @@ image:
   # If both random and image are set, `image` takes priority.
   # To enable images set solid-color.enable to false and set image path
   # Or automatically zend will serve the images instead of the solid color if sepcified
-  path: "images/background.png"
+  path: "/home"
 
   # Use a folder of images to create a slideshow-like background:
   # Example:
@@ -440,7 +440,7 @@ music:
   # Enable/disable the music widget.
   # Useful for dashboards with background music or audio visualization.
   # Optional. Default: false.
-  enabled: true
+  enabled: false
 
   # Position of the music player controls on the screen.
   # Same positioning rules as other widgets.
@@ -452,17 +452,13 @@ music:
   # LOCAL MUSIC SOURCE SETTINGS
   # ---------------------------------------
   local:
-    # Enable local music playback from files/folders on disk.
-    # Optional. Default: false.
-    enabled: true
-
     # Path to a folder containing audio files or a single audio file.
     # Supported formats: mp3, wav, ogg (depending on browser support).
     # Example:
     #   path: "/home/user/Music/"
     #   path: "/home/user/Music/song.mp3"
     # REQUIRED if local.enabled = true and path_list is not set.
-    path: "/media/hdd/EA/Music/spotify"
+    path: "/home"
 
     # Alternative to `path`: provide multiple explicit files/folders.
     # This options should array of only folders or only files
