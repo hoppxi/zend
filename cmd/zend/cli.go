@@ -47,9 +47,11 @@ func Execute() {
 
 			if err := os.WriteFile(portFile, []byte(addr), 0644); err != nil {
 				logger.Log.Error("Failed to write port file: %v", err)
+				os.Exit(1)
 			}
 
-			// extract host/port
+			go server.StartHugoServer()
+
 			host, port, err := net.SplitHostPort(addr)
 			if err != nil {
 				log.Fatalf("Invalid address: %v", err)
@@ -74,7 +76,8 @@ func Execute() {
 			server.RegisterRoutes(http.DefaultServeMux)
 
 			if err := http.ListenAndServe(addr, nil); err != nil {
-				log.Fatalf("Failed to start server: %v", err)
+				logger.Log.Error("Failed to start Zend API server: %v", err)
+				os.Exit(1)
 			}
 		},
 	}
