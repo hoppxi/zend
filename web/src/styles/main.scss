@@ -1,0 +1,362 @@
+:root {
+  --bg-image: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    Helvetica Neue,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+  color: #f5f7fb;
+}
+
+.app {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: #0b1220;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.app::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    60% 60% at 50% 40%,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.55)
+  );
+  pointer-events: none;
+}
+
+.glass {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
+  padding: clamp(16px, 2vw, 28px);
+  backdrop-filter: blur(8px) saturate(120%);
+}
+
+/* Top / Center / Bottom layout */
+.top-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Clock */
+.clock {
+  text-align: center;
+}
+
+.time {
+  font-size: clamp(64px, 12vw, 140px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+}
+
+.date {
+  margin-top: 8px;
+  font-size: clamp(14px, 2.2vw, 20px);
+  opacity: 0.9;
+}
+
+/* Weather */
+.weather {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) inset;
+}
+
+.weather .wx-emoji {
+  font-size: 20px;
+}
+
+.weather .wx-temp {
+  font-weight: 700;
+}
+
+.weather .wx-wind {
+  opacity: 0.85;
+  font-size: 14px;
+}
+
+/* SearchBar */
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    scale 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  transform: translateY(0);
+}
+
+.search.active {
+  transform: translateY(-6px) scale(1.01);
+}
+
+.search-input {
+  width: min(800px, 60vw);
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(10, 15, 25, 0.45);
+  color: #fff;
+  outline: none;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+}
+
+.search-input::placeholder {
+  color: #cdd6f4bb;
+}
+
+.search-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+html.search-focus .search {
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* Pickers / Buttons */
+.picker .btn,
+.music .btn {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease;
+}
+
+.picker .btn:hover,
+.music .btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Picker grid (images) */
+.picker-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 10px;
+  max-height: 40vh;
+  overflow: auto;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.thumb {
+  border: 0;
+  background: none;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.thumb img {
+  width: 100%;
+  height: 70px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(110%);
+  transition: transform 0.25s ease;
+}
+
+.thumb:hover img {
+  transform: scale(1.05);
+}
+
+.muted {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* Music Playlist */
+.picker-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+  max-height: 40vh;
+  overflow: auto;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(10, 15, 25, 0.35);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.track.active {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(10, 15, 25, 0.48);
+}
+
+.track img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.track .disc {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+}
+
+.track-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.t-title {
+  font-weight: 600;
+}
+
+.t-artist {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Visualizer */
+.visualizer {
+  width: 100%;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.visualizer.on {
+  opacity: 1;
+}
+
+/* react-h5-audio-player overrides */
+.rhap_container {
+  border-radius: 16px;
+  background: rgba(10, 15, 25, 0.4);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  margin-bottom: 8px;
+}
+
+.rhap_main-controls-button,
+.rhap_volume-button {
+  color: #fff;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.rhap_main-controls-button:hover,
+.rhap_volume-button:hover {
+  color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.rhap_progress-bar,
+.rhap_progress-filled {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.rhap_progress-filled {
+  background: #fff;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .bottom {
+    grid-template-columns: 1fr;
+  }
+  .search-input {
+    width: 100%;
+  }
+  .picker-grid,
+  .picker-list {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+}
